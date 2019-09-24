@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { CardList } from "./components/card-list/card-list.component";
 import { SearchBox } from "./components/search-box/search-box.component";
+import SelectBox from "./components/select-box/select-box-component";
 import "./App.css";
 
 class App extends Component {
@@ -9,12 +10,27 @@ class App extends Component {
 
     this.state = {
       monsters: [],
-      searchField: ""
+      searchField: "",
+      teams: [
+        { id: 1, name: "robots" },
+        { id: 2, name: "monsters" },
+        { id: 3, name: "robot heads" },
+        { id: 4, name: "cats" }
+      ],
+      selectedTeam: 1
     };
   }
 
-  handleChange = e => {
+  handleSearchbox = e => {
     this.setState({ searchField: e.target.value });
+  };
+
+  handleSelectBox = selected => {
+    this.setState({ selectedTeam: selected });
+  };
+
+  displayTeamName = () => {
+    return `${this.state.teams[this.state.selectedTeam - 1].name}`;
   };
 
   componentDidMount() {
@@ -30,9 +46,16 @@ class App extends Component {
     );
     return (
       <div className="App">
-        <h1>Cats Rolodex</h1>
-        <SearchBox placeholder="search cats" handleChange={this.handleChange} />
-        <CardList monsters={filteredMonsters} />
+        <h1>{this.displayTeamName()} Rolodex</h1>
+        <SelectBox
+          options={this.state.teams}
+          onSelectChange={this.handleSelectBox}
+        />
+        <SearchBox
+          placeholder={this.displayTeamName()}
+          handleChange={this.handleSearchbox}
+        />
+        <CardList monsters={filteredMonsters} team={this.state.selectedTeam} />
       </div>
     );
   }
