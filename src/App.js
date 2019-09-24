@@ -47,13 +47,10 @@ class App extends Component {
     return (
       <div className="App">
         <h1>{this.displayTeamName()} Rolodex</h1>
+        <SearchBox placeholder={"search"} handleChange={this.handleSearchbox} />
         <SelectBox
           options={this.state.teams}
           onSelectChange={this.handleSelectBox}
-        />
-        <SearchBox
-          placeholder={this.displayTeamName()}
-          handleChange={this.handleSearchbox}
         />
         <CardList monsters={filteredMonsters} team={this.state.selectedTeam} />
       </div>

@@ -3,7 +3,11 @@
   border: none;
   outline: none;
   padding: 10px;
-  width: 150px;
   line-height: 30px;
+  width: 150px;
   margin-bottom: 30px;
+  font-size: 18px;
+  border-radius: 0 10px 10px 0;
+  background-color: #0ccac4;
+  color: white;
 }
